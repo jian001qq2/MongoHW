@@ -1,0 +1,22 @@
+<div class="card">
+     
+
+        <div id="collapse{{id}}" class="collapse" aria-labelledby="heading{{id}}" data-parent="#accordion-parent{{id}}">
+            <div class="card-body">
+                <form class="was-validated">
+                    <div class="mb-3">
+                        <label for="comments">Enter New Comment</label>
+                        <textarea class="form-control" id="comments" placeholder="Type comment here." required></textarea>
+                        <button class="btn btn-primary note-button" id='button{{id}}' data-id={{_id}}>Submit</button>
+                </form>
+            </div>
+            <hr>
+            {{#each notes}}
+        <div>{{message}}</div>
+<button class='btn btn-primary delete-button' data-id='{{_id}}'>Delete Comment</button>
+            <hr>
+            {{/each}}
+        </div>
+    </div>
+</div>
+</div>
