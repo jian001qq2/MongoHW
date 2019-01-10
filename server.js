@@ -18,9 +18,24 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 //Mongo DB conncection
-let MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/mongoHeadlines';
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+//--------database configuration with Mongoose------------
+let databaseUrl = 'mongodb://localhost/week18day3mongoose';
+if(process.env.MONGODB_URI){
+  mongoose.connect(process.env.MONGODB_URI);
+}else {
+  mongoose.connect(databaseUrl)
+}
+// --end database configuration -------
+ var db = mongoose.connection;
 
+ //show any mongoose errors
+ db.on('error',function(err){
+   console.log('Mongoose Error: ' , err);
+ })
+//once logged in to the db through mongoose, log a success message 
+db.once('open', function(){
+  console.log('Mongoose connection successful.')
+})
 // Routes
 require('./routes/apiRoutes')(app)
 require('./routes/htmlRoutes')(app)
